@@ -1,12 +1,26 @@
 # Pet Recognition System
 
 ### Description
+The Pet Recognition System is a machine learning-based application designed to classify images of pets, specifically cats and dogs. The system leverages Amazon Rekognition Custom Labels to train a model on a dataset of cat and dog images. Once trained, the model is deployed using AWS Elastic Container Service (ECS) with a Docker container hosting a web application that allows users to upload images of pets for classification. The application predicts whether the uploaded image contains a cat or a dog and displays the result on a simple web interface.
 
 ### Features
+* Custom Model Training: Train a machine learning model using Amazon Rekognition Custom Labels on a dataset of cat and dog images.
+* Image Classification: Predict whether an uploaded image contains a cat or a dog.
+Web Interface: A simple web page for uploading images and viewing classification results.
+* Scalable Deployment: Deployed using AWS ECS with Fargate for serverless container management.
+* Integration with AWS Services: Uses Amazon S3, ECR, ECS, Fargate, and IAM for seamless operation.
+
 
 ### Technologies Used
-
-### Architecture
+* **Amazon Rekognition** for Machine Learning
+* **Docker** for Containerization
+* Other AWS Services:
+    * **Amazon S3** (Simple Storage Service)
+    * **Amazon ECR** (Elastic Container Registry)
+    * **Amazon ECS** (Elastic Container Service)
+    * **AWS Fargate**
+    * **AWS IAM** (Identity and Access Management)
+* Web Application: Simple web interface for image upload and prediction display.
 
 
 # STAGES
@@ -320,6 +334,7 @@ Hi my name is **Koby!** I love to tease Kai. **Rarff!**
 
 Conclusion: 
 This pet Recognition system is up to 99.99% accurate. 
+![alt text](image-57.png)
 
 ## Cleanup: 
 
@@ -329,16 +344,19 @@ Move to the ECS console: https://us-east-1.console.aws.amazon.com/ecs/home?regio
 Click on “Clusters” and then click on the “SkynetCluster” cluster.
 
 Select the SkynetService and click “Delete service” button. Check “Force delete service”, type delete and click “Delete” button.
+![alt text](image-54.png)
 
 Click on “Task definitions” and then click on the “SkynetTaskDefinition” task definition.
 
 Select the active task definition and click “Deregister” button. A pop-up window will appear, click “Deregister” button.
+![alt text](image-55.png)
 
 Click on “Clusters” and then click on the “SkynetCluster” cluster.
 
 Click “Delete cluster” button.
 
 Type delete SkynetCluster and click "Delete" button.
+![alt text](image-56.png)
 
 Move to the ECR console: https://us-east-1.console.aws.amazon.com/ecr/home?region=us-east-1
 
@@ -350,13 +368,15 @@ Go to the Rekognition console: https://us-east-1.console.aws.amazon.com/rekognit
 
 In the left-hand menu select projects.
 
-We will see the project we created in the first stage. We need to stop the project and then delete the project and the versions. For this do:
+We will see the project we created in the first stage. We need to stop the project and then delete the project and the versions. For this, do the following:
 
 Click on the model to see the details. Click on the "Use the model" tab and then click on the "Stop" button.
+![alt text](image-58.png)
 
 Go back to the projects by clicking in the left-hand menu on "Projects".
 
 Select the “skynet-cat-and-dogs” and click “Delete” button.
+![alt text](image-59.png)
 
 Type delete and click “Delete” button.
 
@@ -364,27 +384,30 @@ Go to the S3 console: https://s3.console.aws.amazon.com/s3/home?region=us-east-1
 
 We need to empty the bucket created for the Rekognition model and then delete the bucket. The name of the bucket is the one you got in the first stage with the format custom-labels-console-us-east-1-<random string>.
 
-For this bucket do:
+For this bucket, do:
 
 Select the bucket.
 
 Click Empty.
 
 Type permanently delete, and empty.
+![alt text](image-60.png)
 
 Click "Delete" button.
 
 Type the name of the bucket and click "Delete bucket" button.
+![alt text](image-61.png)
 
 We also need to empty the bucket created by the Cloudformation stack so it can be deleted by the stack in the next step. The name of the bucket is the one you got from the output "S3BucketName" from the Cloudformation stack you deployed.
 
-For this bucket do:
+For this bucket, do:
 
 Select the bucket.
 
 Click Empty.
 
 Type permanently delete, and empty.
+![alt text](image-62.png)
 
 Go to the Cloudformation console: https://console.aws.amazon.com/cloudformation/home?region=us-east-1
 
