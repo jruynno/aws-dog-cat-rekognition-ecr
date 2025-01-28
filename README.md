@@ -239,7 +239,153 @@ Expand `Networking`
 * Click `Create` button.
 
 ## STAGE 4 - Test the application
-After 3-5 minutes, you should see the service `SkynetService` with the status `Active`
-![alt text](image-37.png)
+* After 3-5 minutes, you should see the service `SkynetService` with the status `Active`
+![alt text](image-38.png)
+
+---
+* Click the `Tasks` tab and then click the task available to see the details. 
+![alt text](image-39.png)
+
+* Get the `Public IP` of the task and paste in a new tab. 
+![alt text](image-40.png)
+
+* You should get access to a simple web page where you can upload files of cats and dog to validate the model we trained in a previous stage. 
+![alt text](image-41.png)
+    
+    Bear in mind the following:
+
+        1. You need to upload a file with a cat or a dog but not a picture that contains both. If you upload a picture with both, the model will not be able to predict the correct class. 
+        2. The result of the prediction will be displayed in the web page with a single result (cat or dog).
+        3. The maximum size of the file is 15MB.
+        4. The file must be in JPG or PNG format.
+        5. The maximum for both width and height is 4096 pixels.
+
+You can download images here:
+* Google Images : https://www.google.com/imghp?hl=EN
+* Pexels : https://www.pexels.com/
 
 
+
+---
+        These images are mine. They are my cats and dogs
+
+IMAGE 1: 
+
+Hi my name is **Moon! Purrr...**
+![alt text](Moon.jpeg)
+
+1. Click `Browse`
+2. Click `Upload`
+
+**Result:**
+![alt text](image-46.png)
+---
+IMAGE 2:
+
+Stop! I just woke up! 
+![alt text](<Yawning Kitten.jpeg>)
+**Result:**
+![alt text](image-47.png)
+
+---
+IMAGE 3:
+
+What does it smell? hmmmmm.. purrrr...
+![alt text](<Sniffing Kitten.jpeg>)
+**Result:**
+![alt text](image-48.png)
+
+---
+IMAGE 4:
+
+Hi my name is **Kuma!** I bark at strangers **ARF!**
+![alt text](Kuma.png)
+**Result:**
+![alt text](image-49.png)
+
+---
+IMAGE 5:
+Hi my name is **Kai!** I don't like Koby. You will see him next to me **BARF!**
+![alt text](Kai.png)
+**Result:**
+![alt text](image-50.png)
+
+---
+IMAGE 6:
+Hi my name is **Koby!** I love to tease Kai. **Rarff!**
+![alt text](Koby.png)
+**Result:**
+![alt text](image-51.png)
+
+
+Conclusion: 
+This pet Recognition system is up to 99.99% accurate. 
+
+## Cleanup: 
+
+
+Move to the ECS console: https://us-east-1.console.aws.amazon.com/ecs/home?region=us-east-1#.
+
+Click on “Clusters” and then click on the “SkynetCluster” cluster.
+
+Select the SkynetService and click “Delete service” button. Check “Force delete service”, type delete and click “Delete” button.
+
+Click on “Task definitions” and then click on the “SkynetTaskDefinition” task definition.
+
+Select the active task definition and click “Deregister” button. A pop-up window will appear, click “Deregister” button.
+
+Click on “Clusters” and then click on the “SkynetCluster” cluster.
+
+Click “Delete cluster” button.
+
+Type delete SkynetCluster and click "Delete" button.
+
+Move to the ECR console: https://us-east-1.console.aws.amazon.com/ecr/home?region=us-east-1
+
+Select the skynet-repo and click “Delete” button.
+
+Type delete and click “Delete” button.
+
+Go to the Rekognition console: https://us-east-1.console.aws.amazon.com/rekognition/home?region=us-east-1#/
+
+In the left-hand menu select projects.
+
+We will see the project we created in the first stage. We need to stop the project and then delete the project and the versions. For this do:
+
+Click on the model to see the details. Click on the "Use the model" tab and then click on the "Stop" button.
+
+Go back to the projects by clicking in the left-hand menu on "Projects".
+
+Select the “skynet-cat-and-dogs” and click “Delete” button.
+
+Type delete and click “Delete” button.
+
+Go to the S3 console: https://s3.console.aws.amazon.com/s3/home?region=us-east-1&region=us-east-1
+
+We need to empty the bucket created for the Rekognition model and then delete the bucket. The name of the bucket is the one you got in the first stage with the format custom-labels-console-us-east-1-<random string>.
+
+For this bucket do:
+
+Select the bucket.
+
+Click Empty.
+
+Type permanently delete, and empty.
+
+Click "Delete" button.
+
+Type the name of the bucket and click "Delete bucket" button.
+
+We also need to empty the bucket created by the Cloudformation stack so it can be deleted by the stack in the next step. The name of the bucket is the one you got from the output "S3BucketName" from the Cloudformation stack you deployed.
+
+For this bucket do:
+
+Select the bucket.
+
+Click Empty.
+
+Type permanently delete, and empty.
+
+Go to the Cloudformation console: https://console.aws.amazon.com/cloudformation/home?region=us-east-1
+
+Delete the stack created.
