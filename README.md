@@ -412,3 +412,9 @@ Type permanently delete, and empty.
 Go to the Cloudformation console: https://console.aws.amazon.com/cloudformation/home?region=us-east-1
 
 Delete the stack created.
+
+
+
+Credits:
+
+*This project is based on the Solutions Architect Professional course by Adrian Cantrill. Their comprehensive guides and learning resources have been instrumental in the development of this application.*
